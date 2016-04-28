@@ -3,6 +3,7 @@ namespace :tagging do
     desc "Clean *.gem* files from project root"
     task :clean do
       FileUtils.rm_f Dir.glob('*.gem*')
+      exit 0
     end
 
     desc "Return and set next gem version"
@@ -17,6 +18,7 @@ namespace :tagging do
       else
         puts Tagging::GemVersion.next_version
       end
+      exit 0
     end
   end
 end
