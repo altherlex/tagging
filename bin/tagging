@@ -10,7 +10,7 @@ module Tagging
     def self.run(*args)
       puts '*'*40
       puts args.inspect
-      puts options_parser.inspect
+      puts self.options_parser.inspect
       puts '*'*40
 
       case args
