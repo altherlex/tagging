@@ -10,19 +10,20 @@ module Tagging
       puts '*'*40
       puts args.inspect
       puts '*'*40
-      
+
       case args
-      when :push
-        puts Tagging::AppVersion.increment_and_push rescue exit 1
-        exit 0
+        when :push
+          puts Tagging::AppVersion.increment_and_push rescue exit 1
+          exit 0
 
-      when :version
-        puts Tagging::AppVersion.version rescue exit 1
-        exit 0
+        when :version
+          puts Tagging::AppVersion.version rescue exit 1
+          exit 0
 
-      when :next_version
-        puts Tagging::AppVersion.increment_version rescue exit 1
-        exit 0
+        when :next_version
+          puts Tagging::AppVersion.increment_version rescue exit 1
+          exit 0
+      end
     end
   end
 end
