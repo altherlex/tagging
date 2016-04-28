@@ -24,6 +24,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'git', [">= 1.2.5"]
   s.add_dependency 'logger'
 
+  s.add_runtime_dependency 'git', '~> 1.2', '>= 1.2.5'
+  s.add_runtime_dependency 'logger', '~> 0'
+
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rake'
   # s.add_development_dependency 'coveralls'
