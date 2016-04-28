@@ -8,20 +8,20 @@ require 'tagging/gem_version'
 module Tagging
   class CLI
     def self.run(*args)
-      case args
-        when options[:push]
-          puts Tagging::AppVersion.increment_and_push #rescue exit 1
-          exit 0
-
-        when options[:version]
-          puts Tagging::AppVersion.version #rescue exit 1
-          exit 0
-
-        when options[:next_version]
-          puts Tagging::AppVersion.increment_version #rescue exit 1
-          exit 0
+      if options[:push]
+        puts Tagging::AppVersion.increment_and_push #rescue exit 1
+        exit 0
+      elsif options[:version]
+        puts Tagging::AppVersion.version #rescue exit 1
+        exit 0
+      elsif options[:next_version]
+        puts Tagging::AppVersion.increment_version #rescue exit 1
+        exit 0
+      else
+        puts "## [message] Run `tagging --help' for more options."
       end
     end
+
     def self.options
       options = {}
       opt_parser = OptionParser.new do |opt|
