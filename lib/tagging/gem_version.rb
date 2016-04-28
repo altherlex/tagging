@@ -1,5 +1,3 @@
-load File.dirname(__FILE__) + '/tasks/gem_version.rake'
-
 module Tagging
   class GemVersion
     @@gem_version_file = 'next_gem_version'
