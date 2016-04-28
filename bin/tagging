@@ -7,7 +7,9 @@ require 'tagging/gem_version'
 
 module Tagging
   class CLI
-    def self.run(*args)
+    @@options
+
+    def self.run
       if options[:push]
         puts Tagging::AppVersion.increment_and_push #rescue exit 1
         exit 0
@@ -23,6 +25,8 @@ module Tagging
     end
 
     def self.options
+      return @@options if @@options.present?
+
       options = {}
       opt_parser = OptionParser.new do |opt|
         opt.banner = "Usage: tagging [OPTIONS]"
@@ -62,4 +66,4 @@ module Tagging
   end
 end
 
-Tagging::CLI.run(ARGV)
+Tagging::CLI.run
