@@ -8,26 +8,21 @@ require 'tagging/gem_version'
 module Tagging
   class CLI
     def self.run(*args)
-      puts '*'*40
-      puts args.inspect
-      puts self.options_parser.inspect
-      puts '*'*40
-
       case args
-        when :push
+        when options[:push]
           puts Tagging::AppVersion.increment_and_push rescue exit 1
           exit 0
 
-        when :version
+        when options[:version]
           puts Tagging::AppVersion.version rescue exit 1
           exit 0
 
-        when :next_version
+        when options[:next_version]
           puts Tagging::AppVersion.increment_version rescue exit 1
           exit 0
       end
     end
-    def self.options_parser
+    def self.options
       options = {}
       opt_parser = OptionParser.new do |opt|
         opt.banner = "Usage: tagging [OPTIONS]"
@@ -35,7 +30,7 @@ module Tagging
         opt.separator  "Options"
 
         opt.on("-p","--push","Increment version and push to tag") do |value|
-          options[:push] = value.to_i
+          options[:push] = value
         end
 
         opt.on("-v","--version","Show current version into rails app path") do |value|
@@ -51,9 +46,18 @@ module Tagging
           exit
         end
       end
-
       opt_parser.parse!
+
+      self.options_verify?(options)
+      
       return options
+    end
+
+    def self.options_verify?(op)
+      if [op[:push], op[:version], op[:next_version]].compact.length > 1
+        warn("[fail] Can only push, version or next_version. Choose one.")
+        exit(1)
+      end
     end
   end
 end
