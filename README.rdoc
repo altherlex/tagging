@@ -6,12 +6,13 @@ Automated version management for your Gem builds.
 
 Install
 
-* sudo gem install gem_version
+```bash
+$ sudo gem install gem_version
 
-Use
+or
 
-* require 'gem_version'
-
+$ require 'gem_version'
+```
 	
 == Description
 
@@ -19,36 +20,14 @@ Never bother updating the version for your next gem build by hand.  Configured i
 
 == Use
 
-Require the library in your Rakefile:
+* Rake
 
-  require 'gem_version'
+`bundle exec rake tagging:push`
 
-Use gem_version in your Gem Specification:
+* Bash
 
-  spec = Gem::Specification.new do |s|
-    s.version = GemVersion.next_version
-    ...
-  end
+`cd /rails/app/path && tagging push`
 
-Increment and commit the gem version in your Gemspec rake task:
-
-  desc 'Generate a gemspec file.'
-  task :gemspec do
-    File.open("#{spec.name}.gemspec", 'w') do |f|
-      f.write spec.to_ruby
-    end
-    GemVersion.increment_version
-    GemVersion.commit_and_push
-  end
-
-Everytime you build your gem (this example uses Gemcutter):
-
-  rake gemspec
-  gem build your_gem_name.gemspec
-
-GemVersion provides the next version for each build.
-
-See my Rakefile[http://github.com/jeffp/gem_version/blob/master/Rakefile] for an example.
 
 == Adding other files
 

@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/tagging/version', __FILE__)
+$:.unshift File.expand_path("../lib", __FILE__)
+require "tagging/version"
 
 Gem::Specification.new do |s|
   s.name                  = "tagging"
