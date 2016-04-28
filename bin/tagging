@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
+require 'optparse'
 require 'tagging/app_version'
 require 'tagging/gem_version'
 
@@ -9,6 +10,7 @@ module Tagging
     def self.run(*args)
       puts '*'*40
       puts args.inspect
+      puts options_parser.inspect
       puts '*'*40
 
       case args
@@ -24,6 +26,34 @@ module Tagging
           puts Tagging::AppVersion.increment_version rescue exit 1
           exit 0
       end
+    end
+    def options_parser
+      options = {}
+      opt_parser = OptionParser.new do |opt|
+        opt.banner = "Usage: tagging [OPTIONS]"
+        opt.separator  ""
+        opt.separator  "Options"
+
+        opt.on("-p","--push","Increment version and push to tag") do |value|
+          options[:push] = value.to_i
+        end
+
+        opt.on("-v","--version","Show current version into rails app path") do |value|
+          options[:version] = value
+        end
+        
+        opt.on("-n","--next_version","Show the next version") do |value|
+          options[:next_version] = value
+        end
+
+        opt.on("-h","--help","help") do
+          puts opt_parser
+          exit
+        end
+      end
+
+      opt_parser.parse!
+      return options
     end
   end
 end
