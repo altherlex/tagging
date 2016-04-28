@@ -1,3 +1,6 @@
+require 'git'
+require 'logger'
+
 module Tagging
   class AppVersion
     @@default_commit_message = 'versioning by CI'
