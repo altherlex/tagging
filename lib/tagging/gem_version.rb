@@ -1,4 +1,4 @@
-# load File.dirname(__FILE__) + '/tasks/gem_version.rake'
+load File.dirname(__FILE__) + '/tasks/gem_version.rake'
 
 module Tagging
   class GemVersion

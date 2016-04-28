@@ -1,9 +1,9 @@
-require 'rubygems'
-require 'rake/testtask'
-require "#{File.dirname(__FILE__)}/tagging/app_version.rb"
-require "#{File.dirname(__FILE__)}/tagging/gem_version.rb"
+# require 'rubygems'
+# require 'rake/testtask'
+# require "#{File.dirname(__FILE__)}/tagging/app_version.rb"
+# require "#{File.dirname(__FILE__)}/tagging/gem_version.rb"
 
-task :default => :test
+# task :default => :test
 
 # #require 'rake/testtask'
 # require 'rake/rdoctask'
