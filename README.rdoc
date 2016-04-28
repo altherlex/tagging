@@ -1,4 +1,4 @@
-= GemVersion
+= Tagging
 
 Automated version management for your Gem builds.
 
