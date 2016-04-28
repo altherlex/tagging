@@ -7,9 +7,8 @@ require 'tagging/gem_version'
 
 module Tagging
   class CLI
-    @@options
 
-    def self.run
+    def self.run(options)
       if options[:push]
         puts Tagging::AppVersion.increment_and_push #rescue exit 1
         exit 0
@@ -24,41 +23,8 @@ module Tagging
       end
     end
 
-    def self.options
-      return @@options if @@options.present?
-
-      options = {}
-      opt_parser = OptionParser.new do |opt|
-        opt.banner = "Usage: tagging [OPTIONS]"
-        opt.separator  ""
-        opt.separator  "Options"
-
-        opt.on("-p","--push","Increment version and push to tag") do |value|
-          options[:push] = value
-        end
-
-        opt.on("-v","--version","Show current version into rails app path") do |value|
-          options[:version] = value
-        end
-        
-        opt.on("-n","--next_version","Show the next version") do |value|
-          options[:next_version] = value
-        end
-
-        opt.on("-h","--help","help") do
-          puts opt_parser
-          exit
-        end
-      end
-      opt_parser.parse!
-
-      self.options_verify?(options)
-      
-      return options
-    end
-
     def self.options_verify?(op)
-      if [op[:push], op[:version], op[:next_version]].compact.length > 1
+      if op[:help] and ([op[:push], op[:version], op[:next_version]].compact.length > 1)
         warn("[fail] Can only push, version or next_version. Choose one.")
         exit(1)
       end
@@ -66,4 +32,29 @@ module Tagging
   end
 end
 
-Tagging::CLI.run
+options = {}
+opt_parser = OptionParser.new do |opt|
+  opt.banner = "Usage: tagging [OPTIONS]"
+  opt.separator  ""
+  opt.separator  "Options"
+
+  opt.on("-p","--push","Increment version and push to tag") do |value|
+    options[:push] = value
+  end
+
+  opt.on("-v","--version","Show current version into rails app path") do |value|
+    options[:version] = value
+  end
+  
+  opt.on("-n","--next_version","Show the next version") do |value|
+    options[:next_version] = value
+  end
+
+  opt.on("-h","--help","help") do
+    puts opt_parser
+    exit
+  end
+end
+opt_parser.parse!
+
+Tagging::CLI.run(options)
