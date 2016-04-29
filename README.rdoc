@@ -1,8 +1,8 @@
-= Tagging
+# Tagging
 
 Automated version management for your Gem builds.
 
-== Resources
+## Resources
 
 Install
 
@@ -14,11 +14,11 @@ or
 $ require 'gem_version'
 ```
 	
-== Description
+## Description
 
 Never bother updating the version for your next gem build by hand.  Configured in your Rakefile, gem_version automatically provides the next version and commits it to the repository.
 
-== Use
+## Use
 
 * Rake
 
@@ -29,7 +29,7 @@ Never bother updating the version for your next gem build by hand.  Configured i
 `cd /rails/app/path && tagging push`
 
 
-== Adding other files
+## Adding other files
 
 To add other files to the GemVersion.commit_and_push method use the block.  For instance,
 if you want to commit and push the gemspec file also:
@@ -44,13 +44,13 @@ if you want to commit and push the gemspec file also:
     end
   end
 
-== Bumping or resetting the next gem version
+## Bumping or resetting the next gem version
 
 GemVersion creates a file named 'next_gem_version' in the root directory of your project which contains the 'next' gem version.  Edit the version in this file or use the rake tasks to bump or set the version for the next build.
 
 GemVersion increments the last component of your version.  If you need to bump from 0.1.x to 0.2.x, you'll need to bump the version manually.
 
-== Rake tasks
+## Rake tasks
 
 Two rake tasks gem:clean and gem:version are available whenever you require gem_version.
 
@@ -67,6 +67,6 @@ Two rake tasks gem:clean and gem:version are available whenever you require gem_
   rake gem:version set=0.1.0
 
 
-== Dependencies
+## Dependencies
 
 * Git gem (>= 1.2.5)
