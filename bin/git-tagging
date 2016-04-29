@@ -10,13 +10,13 @@ module Tagging
 
     def self.run(options)
       if options[:push]
-        puts Tagging::AppVersion.increment_and_push #rescue exit 1
+        puts Tagging::AppVersion.increment_and_push rescue exit 1
         exit 0
       elsif options[:version]
-        puts Tagging::AppVersion.version #rescue exit 1
+        puts Tagging::AppVersion.version rescue exit 1
         exit 0
       elsif options[:next_version]
-        puts Tagging::AppVersion.increment_version #rescue exit 1
+        puts Tagging::AppVersion.increment_version rescue exit 1
         exit 0
       else
         puts "## [message] Run `tagging --help' for more options."

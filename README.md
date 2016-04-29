@@ -26,7 +26,7 @@ Never bother updating the version for your next gem build by hand.  Configured i
 
 * Bash
 
-`cd /rails/app/path && tagging push`
+`cd /rails/app/path && git-tagging push`
 
 
 ## Adding other files
