@@ -47,8 +47,8 @@ module Tagging
       end
     end
 
-    def commit_and_push
-      @git = Git.open(project_directory || Dir.pwd, :log=>Logger.new(STDOUT))
+    def commit_and_push(project_directory=Dir.pwd)
+      @git = Git.open(project_directory, :log=>Logger.new(STDOUT))
       
       set_global_config
 
