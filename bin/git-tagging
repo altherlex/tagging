@@ -39,14 +39,15 @@ end
 options = {}
 
 if ARGV.first == 'push'
+  options[:push] = true
+  
   opt_parser = OptionParser.new do |opt|
     opt.banner = "Usage: git-tagging push [OPTIONS]"
     opt.separator  ""
     opt.separator  "Options"
 
     # git config --global 
-    opt.on("--config", "user.email \"you@example.com\" and user.name \"Name\". Like `git config --global`", String) do |value|
-      options[:push] = true
+    opt.on("--config [variables]", "user.email \"you@example.com\" and user.name \"Name\". Like `git config --global`", String) do |value|
       options[:config] = Hash[*ARGV]
     end
 

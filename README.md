@@ -33,7 +33,7 @@ Never bother updating the version for your next gem build by hand.  Configured i
 
 * It's necessary that your server have ssh permission. Seting a git user
 
-`git-tagging push --config user.email you@example.com`
+`git-tagging push --config user.email para.alves@gmail.com user.name "Altherlex Alves"`
 
 
 * Load remote tags
