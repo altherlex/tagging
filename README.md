@@ -26,12 +26,22 @@ Never bother updating the version for your next gem build by hand.  Configured i
 
 `bundle exec rake tagging:push`
 
-* Bash
+### Bash
 
 `cd /rails/app/path && git-tagging push`
 
 
-* AWS OpsWorkers + CircleCI
+* It's necessary that your server have ssh permission. Seting a git user
+
+`git-tagging push --config user.email you@example.com`
+
+
+* Load remote tags
+
+`git-tagging --version -f`
+
+
+### AWS OpsWorkers + CircleCI
 
 ```
   production:

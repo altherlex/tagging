@@ -3,16 +3,25 @@ require 'logger'
 
 module Tagging
   class AppVersion
-    @@default_commit_message = 'versioning by CI'
-    @@version
 
-    def self.version
-      @@version ||= `git -C #{Dir.pwd} describe --tags $(git -C #{Dir.pwd} for-each-ref refs/tags --sort=-taggerdate --format='%(objectname)' --count=1)`.chomp
-      @@version = self.init_version_file unless self.version_format_valid?(@@version)
-      @@version
+    def initialize(options={})
+      @options = {message:'versioning by CI'}.merge(options)
+      @git = nil
     end
 
-    def self.version_format_valid?(v)
+    def version
+      load_tags if @options[:load_tags]
+      @options[:current_version] ||= `git -C #{Dir.pwd} describe --tags $(git -C #{Dir.pwd} for-each-ref refs/tags --sort=-taggerdate --format='%(objectname)' --count=1)`.chomp
+      @options[:current_version] = self.class.init_version_file unless self.class.version_format_valid?(@options[:current_version])
+      @options[:current_version]
+    end
+
+    def load_tags
+      puts "git -C #{Dir.pwd} fetch --tags" 
+      `git -C #{Dir.pwd} fetch --tags`
+    end
+
+    def self.version_format_valid?(v='')
       (v && v =~ /^v\d+\.\d+\.\d+-[\.\d+]+$/)
     end
 
@@ -20,19 +29,31 @@ module Tagging
       initial_version = 'v0.0.1-00'
     end
 
-    def self.increment_and_push
-      self.increment_version
-      self.commit_and_push
+    def increment_and_push
+      load_tags
+      increment_version
+      commit_and_push
     end
 
-    def self.increment_version
-      @@version = self.version.next
+    def increment_version
+      @options[:current_version] = self.version.next
     end
 
-    def self.commit_and_push(project_directory = nil, msg = nil, &block)
-      g=Git.open(project_directory || Dir.pwd, :log=>Logger.new(STDOUT))
-      g.add_tag(self.version, nil, message: @@default_commit_message)
-      g.push('origin', "refs/tags/#{self.version}", f: true)
+    def set_global_config
+      if @options[:config]
+        @options[:config].each do |key, value|
+          @git.config(key, value)
+        end
+      end
+    end
+
+    def commit_and_push
+      @git = Git.open(project_directory || Dir.pwd, :log=>Logger.new(STDOUT))
+      
+      set_global_config
+
+      @git.add_tag(self.version, nil, message: @options[:message])
+      @git.push('origin', "refs/tags/#{self.version}")
     end
   end
 end

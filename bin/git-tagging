@@ -3,20 +3,24 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
 require 'optparse'
 require 'tagging/app_version'
-require 'tagging/gem_version'
 
 module Tagging
   class CLI
 
     def self.run(options)
+      app_version = Tagging::AppVersion.new(options)
+
       if options[:push]
-        puts Tagging::AppVersion.increment_and_push rescue exit 1
+        puts app_version.increment_and_push
         exit 0
       elsif options[:version]
-        puts Tagging::AppVersion.version rescue exit 1
+        puts app_version.version
         exit 0
       elsif options[:next_version]
-        puts Tagging::AppVersion.increment_version rescue exit 1
+        puts app_version.increment_version
+        exit 0
+      elsif options[:load_tags]
+        puts app_version.load_tags
         exit 0
       else
         puts "## [message] Run `tagging --help' for more options."
@@ -33,26 +37,54 @@ module Tagging
 end
 
 options = {}
-opt_parser = OptionParser.new do |opt|
-  opt.banner = "Usage: tagging [OPTIONS]"
-  opt.separator  ""
-  opt.separator  "Options"
 
-  opt.on("-p","--push","Increment version and push to tag") do |value|
-    options[:push] = value
-  end
+if ARGV.first == 'push'
+  opt_parser = OptionParser.new do |opt|
+    opt.banner = "Usage: git-tagging push [OPTIONS]"
+    opt.separator  ""
+    opt.separator  "Options"
 
-  opt.on("-v","--version","Show current version into rails app path") do |value|
-    options[:version] = value
-  end
-  
-  opt.on("-n","--next_version","Show the next version") do |value|
-    options[:next_version] = value
-  end
+    # git config --global 
+    opt.on("--config", "user.email \"you@example.com\" and user.name \"Name\". Like `git config --global`", String) do |value|
+      options[:push] = true
+      options[:config] = Hash[*ARGV]
+    end
 
-  opt.on("-h","--help","help") do
-    puts opt_parser
-    exit
+    opt.on("-m", "Tag message", String) do |message|
+      options[:message] = message
+    end
+
+    opt.on_tail("-h","--help","help push command") do
+      puts opt_parser
+      exit
+    end
+  end  
+else
+  opt_parser = OptionParser.new do |opt|
+    opt.banner = "Usage: git-tagging [OPTIONS]"
+    opt.separator  ""
+    opt.separator  "Options"
+
+    # opt.on("-p","--push","Increment version and push to tag") do |value|
+    #   options[:push] = value
+    # end
+
+    opt.on("-v","--version","Show current version into rails app path") do |value|
+      options[:version] = value
+    end
+    
+    opt.on("-n","--next-version","Show the next version") do |value|
+      options[:next_version] = value
+    end
+
+    opt.on("-f","--fetch-tags","Load remote tags") do
+      options[:load_tags] = true
+    end
+
+    opt.on_tail("-h","--help","help") do
+      puts opt_parser
+      exit
+    end
   end
 end
 opt_parser.parse!
