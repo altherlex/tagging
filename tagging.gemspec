@@ -7,13 +7,8 @@ Gem::Specification.new do |s|
   s.platform              = Gem::Platform::RUBY
   s.authors               = ["Alther Alves"]
   s.email                 = ["para.alves@gmail.com"]
-<<<<<<< Updated upstream
   s.date                  = "2016-04-27"
-  s.homepage              = "http://github.com/altherlex/tagging/tree/master"
-=======
-  s.date                  = "2016-04-21"
   s.homepage              = 'https://github.com/altherlex/tagging'
->>>>>>> Stashed changes
   s.summary               = %q{Never bother updating the version for your next gem build by hand.  Configured in your Rakefile, gem_version provides the next Gem version and stores it to the repository.}
   s.description           = %q{Automated version management for your Gem and RailsApp builds}
   
