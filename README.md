@@ -41,12 +41,16 @@ Never bother updating the version for your next gem build by hand.  Configured i
 `git-tagging --version -f`
 
 
-### AWS OpsWorkers + CircleCI
+### AWS OpsWorkers (gem dpl) + CircleCI
 
 ```
+dependencies:
+  pre:
+    - gem install tagging -v 0.2.1
+
   production:
     branch: master
     commands:
-      - git-tagging push  --config user.email my@mail.com user.name "My Name"`
-      - dpl --provider=opsworks --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app-id=$AWS_APP_ID --wait-until-deployed --custom_json='{"deploy":{"my_app":{"scm":{"revision":"tags/$(git-tagging --version)" }}}}' --skip_cleanup
+      - git-tagging push --config user.email para.alves@gmail.com user.name "Altherlex Alves"
+      - dpl --provider=opsworks --access-key-id=$AWS_ACCESS_KEY_ID --secret-access-key="$AWS_SECRET_ACCESS_KEY" --app-id=$AWS_ESPN_API_ID --wait-until-deployed --custom_json="{'deploy':{'espn_api':{'scm':{'revision':'tags/$(git-tagging --version)' }}}}" --skip_cleanup
 ```
