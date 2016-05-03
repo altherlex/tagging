@@ -48,7 +48,7 @@ if ARGV.first == 'push'
 
     # git config --global 
     opt.on("--config [variables]", "user.email \"you@example.com\" and user.name \"Name\". Like `git config --global`", String) do |value|
-      options[:config] = Hash[*ARGV]
+      options[:config] = Hash[*value, *ARGV]
     end
 
     opt.on("-m", "Tag message", String) do |message|
