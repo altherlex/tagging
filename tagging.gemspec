@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.date                  = "2016-04-27"
   s.homepage              = 'https://github.com/altherlex/tagging'
   s.summary               = %q{Never bother updating the version for your next gem build by hand.  Configured in your Rakefile, gem_version provides the next Gem version and stores it to the repository.}
-  s.description           = %q{Automated version management for your Gem and RailsApp builds}
+  s.description           = %q{Automated version management for your RailsApp builds on CI}
   
   s.files                 = `git ls-files`.split("\n")
   s.test_files            = `git ls-files -- spec/*`.split("\n")
