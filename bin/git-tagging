@@ -91,3 +91,4 @@ end
 opt_parser.parse!
 
 Tagging::CLI.run(options)
+
