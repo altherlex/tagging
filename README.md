@@ -1,6 +1,8 @@
 # Tagging
 
 [![Gem Version](https://badge.fury.io/rb/tagging.svg)](https://badge.fury.io/rb/tagging)
+[![Code Climate](https://codeclimate.com/github/altherlex/tagging/badges/gpa.svg)](https://codeclimate.com/github/altherlex/tagging)
+[![Test Coverage](https://codeclimate.com/github/altherlex/tagging/badges/coverage.svg)](https://codeclimate.com/github/altherlex/tagging/coverage)
 
 Automated version management for your Gem builds.
 
