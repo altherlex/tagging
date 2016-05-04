@@ -4,14 +4,14 @@
 [![Code Climate](https://codeclimate.com/github/altherlex/tagging/badges/gpa.svg)](https://codeclimate.com/github/altherlex/tagging)
 [![Test Coverage](https://codeclimate.com/github/altherlex/tagging/badges/coverage.svg)](https://codeclimate.com/github/altherlex/tagging/coverage)
 
-Automated version management for your Gem builds.
+Automated version management for your RailsApp builds on CI
 
 ## Resources
 
 Install
 
 ```bash
-$ sudo gem install tagging
+$ gem install tagging
 
 or
 
