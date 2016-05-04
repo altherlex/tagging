@@ -11,11 +11,11 @@ Automated version management for your Gem builds.
 Install
 
 ```bash
-$ sudo gem install gem_version
+$ sudo gem install tagging
 
 or
 
-$ require 'gem_version'
+gem 'tagging', require: false
 ```
 	
 ## Description
