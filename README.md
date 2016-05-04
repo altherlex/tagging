@@ -49,7 +49,8 @@ Never bother updating the version for your next gem build by hand.  Configured i
 dependencies:
   pre:
     - gem install tagging -v 0.2.1
-
+    
+deployment:
   production:
     branch: master
     commands:
