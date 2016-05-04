@@ -22,7 +22,7 @@ $ require 'gem_version'
 
 Never bother updating the version for your next gem build by hand.  Configured in your Rakefile, gem_version automatically provides the next version and commits it to the repository.
 
-## Use
+## Usage
 
 * Rake
 
